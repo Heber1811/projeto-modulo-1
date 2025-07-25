@@ -1,0 +1,55 @@
+body{
+    background: #f8f9fa;
+    margin: 0px;
+}
+
+
+
+.logo{
+    height: 70px;
+    
+}
+
+
+.carregar_imagem{
+    width: 100%;
+    border:  2px solid #f27649;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn_apaga_foto{
+    border-radius: 50%;
+    border: 2px solid #f27649 ;
+    background: #f27649;
+    color: #fff;
+    position: absolute ;
+    top:-12px; 
+    right: 5px;
+}
+
+#pagina{
+    width: 100%;
+  
+}
+
+
+.prod{
+    padding: 15px;
+}
+
+input[type="file"]{
+    display: none;
+}
+
+
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25
+em
+;
+    background: initial;
+    background-color: #E0A800 !important;
+    color: #fff;
+    font-size: 1em;
+}

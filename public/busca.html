@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <title>Academia-Heber Luiz</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="assets/css/tooplate-main.css">
+    <link rel="stylesheet" href="assets/css/flex-slider.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/estilo.css">
+    <script defer src="/__/firebase/7.16.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.16.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+
+<!--
+Tooplate 2114 Pixie
+https://www.tooplate.com/view/2114-pixie
+-->
+  </head>
+
+  <body>
+    
+    <!-- Pre Header -->
+    <div id="pre-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3  d-none d-sm-block text-left">
+          <a class="btn_link" href="https://wa.me/556299914-7450" target="_blank">
+          <strong><i class="fab fa-whatsapp"></i> (62) 99914-7450</strong>
+        </a>
+          </div>
+          <div class="col-md-6 col-12 ">
+            <strong class="slogan">Ler livros nunca é demais!</strong>
+          </div>
+          <div class="col-md-3 d-nome d-sm-block text-right">
+           <a class="btn_link" href="linkinstagram" target="_blank"> <i class="fab fa-instagram"></i></a>
+           <a class="btn_link" href="linkfacebook"  target="_blank"> <i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="index.html"><i class="fa fa-home"> </i>-Início
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="busca.html"><i class="fa fa-book"></i>-Mais Livros </a>
+              
+            </li>
+            <li id="promocao" class="nav-item">
+              <a class="nav-link" href="busca.html?por=PROMOCAO"><i class="fa fa-search-dollar"></i>-Promoções</a>
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contato.html"> <i class="fa fa-phone"></i>-Contato</a>
+             
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    
+    <!-- Subscribe Form Starts Here -->
+    <div style="margin-top:50px;" class="subscribe-form">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="main-content">
+              <p>Encontre os melhores livros para sua leitura, temos um enorme acervo de livros desde a letra A até a letra Z, não perca a chance de encontrar o seu livro.</p>
+              <div class="container">
+                <form  action="#" method="get">
+                  <div class="row">
+                    <div class="col-md-7">
+                      <fieldset>
+                        <input id="campo_pesquisa" type="text" class="form-control" placeholder="DIGITE O NOME OU AUTOR DO LIVRO">
+                      </fieldset>
+                    </div>
+                    <div class="col-md-5">
+                      <fieldset>
+                        <button onclick="pesquisarProduto()" type="button" class="button">Pesquisar</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Subscribe Form Ends Here -->
+
+
+      <!-- Page Content -->
+    <!-- Items Starts Here -->
+    <div class="featured-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <div class="section-heading">
+              <div class="line-dec"></div>
+              <h1>Livros Encontrados</h1>
+            </div>
+          </div>
+          <div class="col-md-8 col-sm-12">
+            <div id="filters" class="button-group">
+              <button class="btn btn-primary" data-filter=".item">Todos Produtos</button>
+              <button class="btn btn-primary" data-filter=".recentes">Recentes</button>
+              <button class="btn btn-primary" data-filter=".baixo"> Preço Baixo</button>
+              <button class="btn btn-primary" data-filter=".alto">Preço alto</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="featured container no-gutter">
+      <div id="todos_produtos" class="row posts"></div>
+       </div>
+
+    <div class="page-navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul id="btn_paginas">
+             
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Featred Page Ends Here -->
+
+
+   <!-- Footer Starts Here -->
+   <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="logo">
+            <img src="assets/images/logo.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        
+    <!-- Footer Ends Here -->
+
+
+    <!-- Sub Footer Starts Here -->
+    <div class="sub-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="copyright-text">
+              <p>Copyright &copy; 2021 Academia de Livros
+
+                - Design: <a rel="nofollow" href="https://www.facebook.com/tooplate">Tooplate</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sub Footer Ends Here -->
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/owl.js"></script>
+    <script src="assets/js/isotope.js"></script>
+    <script src="assets/js/flex-slider.js"></script>
+    <script src="assets/js/busca.js"></script>
+
+
+
+
+
+  </body>
+
+</html>

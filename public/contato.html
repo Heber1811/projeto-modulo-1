@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <title>Academia-Heber</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>  
+    <link rel="stylesheet" href="assets/css/tooplate-main.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/flex-slider.css">
+    <link rel="stylesheet" href="assets/css/estilo.css">
+    <script defer src="/__/firebase/7.16.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/7.16.1/firebase-firestore.js"></script> 
+    <script defer src="/__/firebase/init.js"></script>
+    <link rel="shortcut icon" href="../public/assets/images/favicon.png" type="image/x-icon">
+<!--
+Tooplate 2114 Pixie
+https://www.tooplate.com/view/2114-pixie
+-->
+  </head>
+
+  <body>
+    
+    <!-- Pre Header -->
+    <div id="pre-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 d-none d-sm-block text-left">
+            <a class="btn_link" href="https://wa.me/5562991016329" target="_blank"><strong><i class="fab fa-whatsapp"></i> (62) 99101-6329</strong>
+            </a>
+          </div>
+          <div class="col-md-6 col-12">
+            <strong class="slogan">Ler livros nunca é demais!</strong>
+          </div>
+          <div class="col-md-3 d-none d-sm-block text-right">
+            <a href="#" class="btn_link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="btn_link"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="busca.html"><i class="fa fa-shopping-cart"></i> Comprar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="busca.html"><i class="fa fa-book"></i> Mais Livros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="busca.html?por=PROMOCAO"><i class="fa fa-search-dollar"></i> Promoções</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="contato.html"><i class="fa fa-phone"></i> Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+   
+
+    <div class="contact-page">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Contato</h1>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div id="map">
+                      <!-- How to change your own map point
+                             1. Go to Google Maps
+                             2. Click on your location point
+                             3. Click "Share" and choose "Embed map" tab
+                             4. Copy only URL and paste it within the src="" field below
+                      -->
+  
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.8373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi+Central+Market!5e0!3m2!1sen!2sth!4v1532967884907" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="right-content">
+                <div class="container">
+                  <form id="contact" action="#" method="post">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <fieldset>
+                          <input  type="text" class="form-control" id="nome" placeholder="Digite seu nome..." required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-md-6">
+                        <fieldset>
+                          <input  type="text" class="form-control" id="email" placeholder="Digite seu e-mail..." required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-md-12">
+                        <fieldset>
+                          <input type="text" class="form-control" id="assunto" placeholder="Assunto..." required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-md-12">
+                        <fieldset>
+                          <textarea  rows="6" class="form-control" id="mensagem" placeholder="Mensagem..." required=""></textarea>
+                        </fieldset>
+                      </div>
+                      <div class="col-md-12">
+                        <fieldset>
+                          <button type="button" id="form-submit" onclick="enviarMensagem()" class="button">Enviar Mensagem</button>
+                        </fieldset>
+                      </div>
+                      
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <!-- Footer Starts Here -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="logo">
+              <img src="assets/images/logo.png" alt="">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Footer Ends Here -->
+
+
+    <!-- Sub Footer Starts Here -->
+    <div class="sub-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="copyright-text">
+              <p>Copyright &copy; 2021 Academia de Livros
+                
+                - Design: <a rel="nofollow" href="https://www.facebook.com/tooplate">Tooplate</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sub Footer Ends Here -->
+
+    
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/owl.js"></script>
+    <script src="assets/js/isotope.js"></script>
+    <script src="assets/js/flex-slider.js"></script>
+    <script src="assets/js/contato.js"></script>
+
+
+    <script language = "text/Javascript"> 
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+
+
+  </body>
+
+</html>

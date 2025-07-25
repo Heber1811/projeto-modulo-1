@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio-Heber Luiz</title>
+
+     
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../assets/css/inicio.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css">
+     <script defer src="/__/firebase/7.16.1/firebase-app.js"></script>
+     <script defer src="/__/firebase/7.16.1/firebase-auth.js"></script>
+     <script defer src="/__/firebase/7.16.1/firebase-storage.js"></script>
+     <script defer src="/__/firebase/7.16.1/firebase-firestore.js"></script>
+     <script defer src="/__/firebase/init.js"></script>
+    
+    
+
+
+</head>
+<body>
+
+  <div id="load">
+    <img src="../assets/images/Rolling-1s-200px.gif" alt="">
+  </div>
+
+  
+  <nav class="navbar navbar-light  navbar-expand-lg shadow ">
+    <a class="navbar-brand" href="#">
+        <img src="../assets/images/logo.png" class="logo">            
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText" style="justify-content: end;">
+        <ul class="navbar-nav mr">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 emaillogado@gmail.com
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" onclick="recuperarSenha()" href="#">Alterar Senha</a>
+                  <a class="dropdown-item" href="#" onclick="firebase.auth().signOut()">Encerrar Sessão</a>
+                </div>
+              </li>
+        </ul>
+</nav>
+
+<div class="prod">
+
+<div id="pagina">
+  <div class="row">
+    <div id="menu" class="col col-md-3 col-12">
+      <ul class="list-group shadow">
+        <li onclick="location.href='./index.html'" class="list-group-item">Produtos</li>
+        <li onclick="location.href='./clientes.html'" class="list-group-item">Clientes</li>
+        <li onclick="location.href='./vendas.html'" class="list-group-item">Vendas</li>
+        <li onclick="location.href='./destaques.html'" class="list-group-item">Destaques</li>
+        <li onclick="location.href='./usuarios.html'" class="list-group-item">Usuários</li>
+      </ul>
+    </div>
+    <div id="conteudo" class="col col-md-9 col-12">
+      <div class="card shadow">
+        <div class="card-body">
+          <button class="btn btn-warning float-right" onclick="novoProduto()">Cadastrar Produtos</button>
+          <br><h5 class="card-title">Lista de Produtos</h5>
+          <table id="tabela_produtos" class="table table-striped">
+            <thead>
+              <tr>
+                <th>#Cod. Produto</th>
+                <th>Nome Produto</th>
+                <th>Preço Venda</th>
+                <th>Preço Compra</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista_produtos"></tbody>               
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal_produto" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Salvar Produto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col col-md-6 col-12">
+            <div class="form-group">
+              <label for=""><b>Nome Produto*</b></label>
+              <input type="text" id="produto_nome" class="form-control">
+            </div>
+          </div>
+          <div class="col col-md-6 col-12">
+            <div class="form-group">
+              <label for=""><b>Autor/Fabricante*</b></label>
+              <input type="text" id="produto_autor_fabricante" class="form-control">
+            </div>
+          </div>
+          <div class="col col-md-12 col-12">
+            <div class="form-group">
+              <label for=""><b>Descrição</b></label>
+              <textarea id="produto_descricao" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="col col-md-6 col-12">
+            <div class="form-group">
+              <label for=""><b>Categorias* (Separado por ;)</b></label>
+              <input id="produto_categorias" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="col col-md-6 col-12">
+            <div class="form-group">
+              <label for=""><b>URL Pagamento*</b></label>
+              <input id="produto_url" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="col col-md-3 col-12">
+            <div class="form-group">
+              <label for=""><b>Preço Venda*</b></label>
+              <input type="text" name="" class="form-control mascara_dinheiro" id="produto_preco_venda">
+            </div>
+          </div>
+          <div class="col col-md-3 col-12">
+            <div class="form-group">
+              <label for=""><b>Preço Compra*</b></label>
+              <input type="text" name="" class="form-control mascara_dinheiro" id="produto_preco_compra">
+            </div>
+          </div>
+          <div class="col col-md-3 col-12">
+            <div class="form-group">
+              <label for=""><b>Desconto*</b></label>
+              <input type="number" class="form-control" id="produto_desconto">
+            </div>
+          </div>
+          <div class="col col-md-3 col-12">
+            <div class="form-group">
+              <label for=""><b>QTD. Estoque*</b></label>
+              <input type="number" id="produto_qtd_estoque" class="form-control">
+            </div>
+          </div>
+          <div class="col col-md-2 col-12">
+            <div class="form-group">
+              <input type="file"accept="image/*" id="produto_foto_destaque" class="form_control btn_apaga_foto">
+              <img onclick="$(this).parent().find('input').click()" src="../assets/images/sem_foto.png" class="carregar_imagem" alt="">
+            </div>
+          </div>
+          <div class="col col-md-2 col-12">
+            <div class="form-group">
+              <input type="file" accept="image/*" id="produto_foto_1" class="form_control">
+              <button class="btn_apaga_foto" onclick="removerFoto(this)"><i class="fas fa-trash"></i></button>
+              <img onclick="$(this).parent().find('input').click()" src="../assets/images/sem_foto.png" class="carregar_imagem" alt="">
+            </div>
+          </div>
+          <div class="col col-md-2 col-12">
+            <div class="form-group">
+              <input type="file" accept="image/*" id="produto_foto_2" class="form_control">
+              <button class="btn_apaga_foto" onclick="removerFoto(this)"><i class="fas fa-trash"></i></button>
+              <img onclick="$(this).parent().find('input').click()" src="../assets/images/sem_foto.png" class="carregar_imagem" alt="">
+            </div>
+          </div>
+          <div class="col col-md-2 col-12">
+            <div class="form-group">
+              <input type="file" accept="image/*" id="produto_foto_3" class="form_control">
+              <button class="btn_apaga_foto" onclick="removerFoto(this)"><i class="fas fa-trash"></i></button>
+              <img onclick="$(this).parent().find('input').click()" src="../assets/images/sem_foto.png" class="carregar_imagem" alt="">
+            </div>
+          </div>
+          <div class="col col-md-2 col-12">
+            <div class="form-group">
+              <input type="file" accept="image/*" id="produto_foto_4" class="form_control">
+              <button class="btn_apaga_foto" onclick="removerFoto(this)"><i class="fas fa-trash"></i></button>
+              <img onclick="$(this).parent().find('input').click()" src="../assets/images/sem_foto.png" class="carregar_imagem" alt="">
+            </div>
+          </div>
+          <div class="col col-md-2 col-12">
+            <div class="form-group">
+              <input type="file" accept="image/*" id="produto_foto_5" class="form_control">
+              <button class="btn_apaga_foto" onclick="removerFoto(this)"><i class="fas fa-trash"></i></button>
+              <img onclick="$(this).parent().find('input').click()" src="../assets/images/sem_foto.png" class="carregar_imagem" alt="">
+            </div>
+          </div>              
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="salvarProduto()" class="btn btn-warning">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.2/js/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/js/inicio.js"></script>
+<script src="../assets/js/recuperar-senha.js"></script>
+
+
+
+</body>
+</html>

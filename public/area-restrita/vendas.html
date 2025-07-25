@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Vendas-Heber Luiz</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+      <link rel="stylesheet" href="../assets/css/inicio.css">
+      <link rel="stylesheet" href="../assets/css/loading.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css">
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+      <script defer src="/__/firebase/7.16.1/firebase-app.js"></script>
+      <script defer src="/__/firebase/7.16.1/firebase-auth.js"></script>
+      <script defer src="/__/firebase/7.16.1/firebase-storage.js"></script>
+      <script defer src="/__/firebase/7.16.1/firebase-firestore.js"></script>
+      <script defer src="/__/firebase/init.js"></script>
+   </head>
+   <body>
+      <div id="load">
+         <img src="../assets/images/Rolling-1s-200px.gif" alt="">
+      </div>
+      <nav class="navbar navbar-light navbar-expand-lg shadow">
+         <a class="navbar-brand" href="#">
+         <img src="../assets/images/logo.png" class="logo">            
+         </a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarText" style="justify-content: end;">
+         <ul class="navbar-nav mr">
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               emaillogado@gmail.com
+               </a>
+               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" onclick="recuperarSenha()" href="#">Alterar Senha</a>
+                  <a class="dropdown-item" href="#" onclick="firebase.auth().signOut()">Encerrar Sessão</a>
+               </div>
+            </li>
+         </ul>
+      </nav>
+      <div class="prod">
+         <div id="pagina">
+            <div class="row">
+               <div id="menu" class="col col-md-3 col-12">
+                  <ul class="list-group shadow">
+                     <li onclick="location.href='./index.html'" class="list-group-item">Produtos</li>
+                     <li onclick="location.href='./clientes.html'" class="list-group-item">Clientes</li>
+                     <li onclick="location.href='./vendas.html'" class="list-group-item">Vendas</li>
+                     <li onclick="location.href='./destaques.html'" class="list-group-item">Destaques</li>
+                     <li onclick="location.href='./usuarios.html'" class="list-group-item">Usuários</li>
+                  </ul>
+               </div>
+               <div id="conteudo" class="col col-md-9 col-12">
+                  <div class="card shadow">
+                     <div class="card-body">
+                        <button onclick="novaVenda()" class="btn btn-warning float-right">Cadastrar Venda</button>
+                        <br>
+                        <h5 class="card-title">Lista de Vendas</h5>
+                        <div class="row">
+                           <div class="col-md-3 col-12">
+                              <div class="form-group"> 
+                                 <label for=""><b>Data Inicial:</b></label>
+                                 <input type="date" id="data_inicial" class="form-control"> 
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-12">
+                              <div class="form-group"> 
+                                 <label for=""><b>Data Final:</b></label>
+                                 <input type="date" id="data_final" class="form-control"> 
+                              </div>
+                           </div>
+                           <div class="col-md-2 col-12 " style="padding-top: 30px;">
+                              <button class="btn btn-warning" onclick="buscarVendas()">Pesquisar</button> 
+                           </div>
+                           <div class="col-md-4 col-12 " style="padding-top: 26px;">
+                              <b> Vendido R$ : </b><span id="total_vendido">0,00</span><br>
+                              <b> Lucro R$ : </b><span id="total_lucro">0,00</span>
+                           </div>
+                        </div>
+                        <table id="tabela_vendas" class="table table-striped">
+                           <thead>
+                              <tr>
+                                 <th>Código/Situação</th>
+                                 <th>Data Compra</th>
+                                 <th>Nome Cliente/Produto</th>
+                                 <th>Valor</th>
+                                 <th>Ações</th>
+                              </tr>
+                           </thead>
+                           <tbody id="lista_vendas"></tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="modal_venda" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title">Venda</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                     <a href="#tab_comprador" class="nav_tab nav-link active">Comprador/Situação</a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="#tab_produto" class="nav_tab nav-link ">Produtos</a>
+                  </li>
+                  <li class="nav-item">
+                     <a href="#tab_endereco" class="nav_tab nav-link ">Endereço</a>
+                  </li>
+               </ul>
+               <div id="tab_comprador" class="row_tab row" style="padding-top: 30px;">
+                  <div class="col col-md-6 col-12">
+                     <div class="form-group">
+                        <label for=""><b>Situação*</b></label>
+                        <select class="form-control" id="venda_situacao">
+                           <option value="Aguardando Confirmação">Aguardando Confirmação</option>
+                           <option value="Pagamento Confirmado">Pagamento Confirmado</option>
+                           <option value="Pagamento Pendente">Pagamento Pendente</option>
+                           <option value="Pedido Separado">Pedido Separado</option>
+                           <option value="Pedido Enviado">Pedido Enviado</option>
+                           <option value="Pedido Entregue">Pedido Entregue</option>
+                           <option value="Cancelado">Cancelado</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="col col-md-6 col-12">
+                     <div class="form-group">
+                        <label for=""><b>Nome*</b> </label><br>
+                        <select id="nome" style="width: 100%;" class="form-control obrigatorio"></select>
+                     </div>
+                  </div>
+                  <div class="col col-md-6">
+                     <div class="form-group">
+                        <label for=""><b>CPF*</b> </label>
+                        <input id="cpf" type="text" class="form-control obrigatorio">
+                     </div>
+                  </div>
+                  <div class="col col-md-6">
+                     <div class="form-group">
+                        <label for=""><b>Data Nascimento*</b> </label>
+                        <input id="data_nascimento" type="date" class="form-control">
+                     </div>
+                  </div>
+                  <div class="col col-md-6">
+                     <div class="form-group">
+                        <label for=""><b>Celular de Contato*</b> </label>
+                        <input id="celular" type="text" class="form-control">
+                     </div>
+                  </div>
+                  <div class="col col-md-6">
+                     <div class="form-group">
+                        <label for=""><b>E-mail de Contato*</b> </label>
+                        <input id="email" type="text" class="form-control obrigatorio">
+                     </div>
+                  </div>
+               </div>
+               <div id="tab_produto" class="row_tab row" style="display:none; padding-top: 30px;">
+                  <div class="col col-md-6 col-12">
+                     <div class="form-group">
+                        <label for=""><b>Nome Produto*</b></label><br>
+                        <select type="text" id="produto_nome" style="width: 100%;" class="form-control"></select>
+                     </div>
+                  </div>
+                  <div class="col col-md-6 col-12">
+                     <div class="form-group">
+                        <label for=""><b>Autor/Fabricante*</b></label>
+                        <input type="text" id="produto_autor_fabricante" class="form-control">
+                     </div>
+                  </div>
+                  <div class="col col-md-3 col-12">
+                     <div class="form-group">
+                        <label for=""><b>Preço Venda*</b></label>
+                        <input type="text" name="" class="form-control mascara_dinheiro" id="produto_preco_venda">
+                     </div>
+                  </div>
+                  <div class="col col-md-3 col-12">
+                     <div class="form-group">
+                        <label for=""><b>Desconto*</b></label>
+                        <input type="number" class="form-control" id="produto_desconto">
+                     </div>
+                  </div>
+               </div>
+               <div id="tab_endereco" class="row_tab row" style="display:none; padding-top: 30px;">
+                  <div class="col col-md-4">
+                     <div class="form-group">
+                        <label for=""><b>CEP*</b> </label>
+                        <input id="cep" type="text" onchange="buscarCEP()" class="form-control obrigatorio">
+                     </div>
+                  </div>
+                  <div class="col col-md-8">
+                     <div class="form-group">
+                        <label for=""><b>Logradouro*</b></label>
+                        <input id="logradouro" type="text" class="form-control obrigatorio">
+                     </div>
+                  </div>
+                  <div class="col col-md-3">
+                     <div class="form-group">
+                        <label for=""><b>Número</b> </label>
+                        <input id="numero" type="text" class="form-control">
+                     </div>
+                  </div>
+                  <div class="col col-md-9">
+                     <div class="form-group">
+                        <label for=""><b>Complemento</b> </label>
+                        <input id="complemento" type="text" class="form-control">
+                     </div>
+                  </div>
+                  <div class="col col-md-5">
+                     <div class="form-group">
+                        <label for=""><b>Bairro*</b> </label>
+                        <input id="bairro" type="text" class="form-control obrigatorio">
+                     </div>
+                  </div>
+                  <div class="col col-md-4">
+                     <div class="form-group">
+                        <label for=""><b>Cidade*</b> </label>
+                        <input id="cidade" type="text" class="form-control obrigatorio">
+                     </div>
+                  </div>
+                  <div class="col col-md-3">
+                     <div class="form-group">
+                        <label for=""><b>Estado*</b> </label>
+                        <input id="estado" type="text" class="form-control obrigatorio">
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" onclick="salvarVenda()" class="btn btn-warning">Salvar Venda</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/1.11.2/js/dataTables.bootstrap4.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+      <script src="../assets/js/vendas.js"></script>
+      <script src="../assets/js/recuperar-senha.js"></script>
+   </body>
+</html>
